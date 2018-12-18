@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Rollbar Example";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Rollbar Example</title>
+    <style>
+        .hasError {
+            background-color: #c3c3c3;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        #create-error-div {
+            position: absolute;
+            left: 30%;
+            top: 20%;
+            border: 1px solid #ccc;
+            padding: 100px 100px;
+            background: #ccc;
+        }
+        #create-error-div1 {
+            position: absolute;
+            left: 38%;
+            top: 40%;
+          
+        }
+
+        #header-div {
+            position: absolute;
+            border: 1px solid #ccc;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="header-div">
+         Rollbar Example
+     </div>-->
+    <div class="hasError ErrorContainer">
+
+    </div>
+    <div id="create-error-div">
+        @using (Html.BeginForm("GenerateError", "CreateError", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td>Press create an error to generate exception</td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input style="height:50px;width:200px" type="submit" value="Generate an error" name="name" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div id="create-error-div1">
+        @using (Html.BeginForm("GenerateCoughtError", "CreateError", FormMethod.Post))
+        {
+           
+                        <input style="height:50px;width:200px" type="submit" value="Generate an cought error" name="name" />
+               
+        }
+    </div>
+</body>
+</html>
+
