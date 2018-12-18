@@ -17,17 +17,20 @@
 
         #create-error-div {
             position: absolute;
-            left: 30%;
+            left: 10%;
             top: 20%;
             border: 1px solid #ccc;
             padding: 100px 100px;
-            background: #ccc;
+            background: #d5cece;
         }
+
         #create-error-div1 {
             position: absolute;
-            left: 38%;
-            top: 40%;
-          
+            right: 10%;
+            top: 20%;
+            border: 1px solid #ccc;
+            padding: 100px 100px;
+            background: #ccc;           
         }
 
         #header-div {
@@ -35,6 +38,8 @@
             border: 1px solid #ccc;
             background: #ccc;
         }
+       
+      
     </style>
 </head>
 <body>
@@ -44,32 +49,44 @@
     <div class="hasError ErrorContainer">
 
     </div>
-    <div id="create-error-div">
-        @using (Html.BeginForm("GenerateError", "CreateError", FormMethod.Post))
-        {
-            <table>
-                <tr>
-                    <td>Press create an error to generate exception</td>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input style="height:50px;width:200px" type="submit" value="Generate an error" name="name" />
-                    </td>
-                </tr>
-            </table>
-        }
-    </div>
-    <div id="create-error-div1">
-        @using (Html.BeginForm("GenerateCoughtError", "CreateError", FormMethod.Post))
-        {
-           
-                        <input style="height:50px;width:200px" type="submit" value="Generate an cought error" name="name" />
-               
-        }
-    </div>
+   
+        <div id="create-error-div">
+            @using (Html.BeginForm("GenerateError", "CreateError", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td>Press create an error to generate exception</td>
+                    </tr>
+                    <tr>
+                        <td> <b><i>RollBar and Sentry</i></b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input style="height:50px;width:200px" type="submit" value="Generate an error" name="name" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+        <div id="create-error-div1">
+            @using (Html.BeginForm("GenerateCoughtError", "CreateError", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td>Press create an  error to generate exception</td>
+                    </tr>
+                    <tr>
+                        <td><b><i>RollBar and Sentry</i></b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input style="height:50px;width:200px" type="submit" value="Generate an cought error" name="name" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+   
 </body>
 </html>
 
