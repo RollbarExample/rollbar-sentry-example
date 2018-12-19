@@ -38,7 +38,6 @@ namespace RollbarDotnetExample.Controllers
             {
                 string[] teststring = null;
                 int a = teststring.Count();
-
             }
             catch (Exception )
             {
@@ -47,7 +46,6 @@ namespace RollbarDotnetExample.Controllers
             }
             return null;
            // throw new Exception("This is test exception");
-
         }
 
     }
