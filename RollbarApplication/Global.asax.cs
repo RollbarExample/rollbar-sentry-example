@@ -28,14 +28,19 @@ namespace RollbarApplication
             {
                 Environment = "production"
             });
-            ConfigureRollbarTelemetry();
+          
             ConfigureRollbarServer();
-            //var ravenClient = new RavenClient("https://83b1b8aeded04c109de4f0e11a5be07d@sentry.io/1354823");
-           
-            //GlobalFilters.Filters.Add(new HandleErrorAttribute());
-            //GlobalFilters.Filters.Add(new RavenHandleErrorAttribute());
+            ConfigureRollbarTelemetry();
         }
 
+        private static void ConfigureRollbarServer()
+        {
+            Server server = new Server();
+            // server.CodeVersion = "00e9466";
+            server.Root = "/";
+            server.Branch = "master";
+            RollbarLocator.RollbarInstance.Config.Server = server;
+        }
         private static void ConfigureRollbarTelemetry()
         {
             TelemetryConfig telemetryConfig = new TelemetryConfig(
@@ -45,13 +50,6 @@ namespace RollbarApplication
             TelemetryCollector.Instance.Config.Reconfigure(telemetryConfig);
         }
 
-        private static void ConfigureRollbarServer()
-        {
-            Server server = new Server();
-           // server.CodeVersion = "00e9466";
-            server.Root = "/WebApplication2";
-            server.Branch = "master";
-            RollbarLocator.RollbarInstance.Config.Server = server;
-        }
+        
     }
 }

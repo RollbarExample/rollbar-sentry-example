@@ -13,39 +13,31 @@ namespace RollbarDotnetExample.Controllers
 {
     public class CreateErrorController : Controller
     {
-        //RavenClient ravenClient = new RavenClient("https://83b1b8aeded04c109de4f0e11a5be07d@sentry.io/1354823");
-        // GET: CreateError
         public ActionResult Index()
-
-
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult GenerateError()
+        public ActionResult GenerateUncaughtErrorForRollbar()
         {
-
-            //throw new Exception("This is test exception");
              string teststring = null;
              int a = teststring.Length;
              return null;
-
         }
-        public ActionResult GenerateCoughtError()
+        [HttpPost]
+        public ActionResult GenerateCoughtErrorForRollbar()
         {
             try
             {
-                string[] teststring = null;
-                int a = teststring.Count();
+                double[] testArray = new double[10];
+                double test = testArray[11]; 
             }
-            catch (Exception )
+            catch (Exception e)
             {
-           
-                throw;
+                RollbarLocator.RollbarInstance.Error(e);
             }
             return null;
-           // throw new Exception("This is test exception");
         }
 
     }
