@@ -16,6 +16,7 @@ namespace RollbarApplication
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        static string host;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -28,28 +29,68 @@ namespace RollbarApplication
             {
                 Environment = "production"
             });
-          
+            
             ConfigureRollbarServer();
-            ConfigureRollbarTelemetry();
+          //  ConfigureRollbarTelemetry();
         }
-
+        
         private static void ConfigureRollbarServer()
         {
             Server server = new Server();
             // server.CodeVersion = "00e9466";
-            server.Root = "/";
+            server.Root = "F:\\RollbarDotNet\\Rollbar-Sentry\\rollbar-sentry-example\\";
             server.Branch = "master";
             RollbarLocator.RollbarInstance.Config.Server = server;
         }
         private static void ConfigureRollbarTelemetry()
         {
-            TelemetryConfig telemetryConfig = new TelemetryConfig(
+           TelemetryConfig telemetryConfig = new TelemetryConfig(
               telemetryEnabled: true,
-              telemetryQueueDepth: 3
+              telemetryQueueDepth: 100
             );
+            
             TelemetryCollector.Instance.Config.Reconfigure(telemetryConfig);
+           /* TelemetryCollector.Instance.Capture(
+                new Telemetry(
+                    TelemetrySource.Server,
+                    TelemetryLevel.Info,
+                    new NetworkTelemetry("GET",host , DateTime.Now,null, 200,null))
+                );*/
+        }
+        
+        void Application_BeginRequest(Object source, EventArgs e)
+        {
+            HttpApplication app = (HttpApplication)source;
+            HttpContext context = app.Context;
+
+            string[] array = FirstRequestInitialisation.Initialise(context);
+           // Console.WriteLine("base url : " + host);
+            TelemetryCollector.Instance.Capture(
+                new Telemetry(
+                    TelemetrySource.Server,
+                    TelemetryLevel.Info,
+                    new NetworkTelemetry(array[1],array[0], DateTime.Now, null, 200, null))
+                );
         }
 
-        
+        class FirstRequestInitialisation
+        {
+            private static string host = null;
+
+            private static Object s_lock = new Object();
+
+            // Initialise only on the first request
+            public static string[] Initialise(HttpContext context)
+            {
+                string[] array = new string[2];
+                Uri uri = HttpContext.Current.Request.Url;
+                string method= HttpContext.Current.Request.HttpMethod;
+                host = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
+                array[0] = host;
+                array[1] = method;
+                return array;
+            }
+        }
+
     }
 }

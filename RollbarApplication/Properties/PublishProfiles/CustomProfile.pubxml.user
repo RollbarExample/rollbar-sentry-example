@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2018 13:37:01</publishTime>
     </File>
     <File Include="bin/RollbarApplication.dll">
-      <publishTime>12/19/2018 22:01:23</publishTime>
+      <publishTime>12/21/2018 22:46:31</publishTime>
     </File>
     <File Include="bin/RollbarApplication.pdb">
-      <publishTime>12/19/2018 22:01:23</publishTime>
+      <publishTime>12/21/2018 22:46:31</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>12/19/2018 13:37:01</publishTime>
@@ -715,7 +715,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2018 13:36:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/19/2018 21:38:38</publishTime>
+      <publishTime>12/21/2018 22:05:52</publishTime>
     </File>
   </ItemGroup>
 </Project>
