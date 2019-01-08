@@ -11,11 +11,17 @@ using RollBar.App_Start;
 using RollbarApplication.App_Start;
 using Rollbar.Telemetry;
 using Rollbar.DTOs;
+using Sentry.EntityFramework;
+using Sentry;
+using System.Configuration;
 
 namespace RollbarApplication
 {
+    
+
     public class MvcApplication : System.Web.HttpApplication
     {
+        private IDisposable _sentrySdk;
         static string host;
         protected void Application_Start()
         {
@@ -23,17 +29,36 @@ namespace RollbarApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            SentryDatabaseLogging.UseBreadcrumbs();
+            _sentrySdk = SentrySdk.Init(o =>
+            {
+                // We store the DSN inside Web.config
+                o.Dsn = new Sentry.Dsn(ConfigurationManager.AppSettings["SentryDsn"]);
+                // Add the EntityFramework integration
+                o.AddEntityFramework();
+                o.Release = "1fbdda4534d3d7b5a282150dd041756661aba62e";
+            });
             const string postServerItemAccessToken = "d903ca7d69e044908479c96e8c4af17a";
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(postServerItemAccessToken)
             {
                 Environment = "production"
             });
-            
             ConfigureRollbarServer();
-          //  ConfigureRollbarTelemetry();
+            ConfigureRollbarTelemetry();
+            ConfigurePersonData();
         }
-        
+
+        protected void Application_Error()
+        {
+            var exception = Server.GetLastError();
+            SentrySdk.CaptureException(exception);
+        }
+
+        public override void Dispose()
+        {
+            _sentrySdk.Dispose();
+            base.Dispose();
+        }
         private static void ConfigureRollbarServer()
         {
             Server server = new Server();
@@ -56,6 +81,14 @@ namespace RollbarApplication
                     TelemetryLevel.Info,
                     new NetworkTelemetry("GET",host , DateTime.Now,null, 200,null))
                 );*/
+        }
+
+        private static void ConfigurePersonData()
+        {
+            Person person = new Person("007");
+            person.Email = "jbond@mi6.uk";
+            person.UserName = "JBOND";
+            RollbarLocator.RollbarInstance.Config.Person = person;
         }
         
         void Application_BeginRequest(Object source, EventArgs e)

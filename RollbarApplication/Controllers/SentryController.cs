@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sentry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,7 +25,10 @@ namespace RollbarApplication.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+               e.Data.Add("User Name", "Test User");
+               e.Data.Add("User ID", "1");
+                SentrySdk.CaptureException(e);
+                //throw e;
             }
             return null;
             // throw new Exception("This is test exception");

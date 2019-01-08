@@ -15,8 +15,11 @@ namespace RollbarApplication.App_Start
         {
             if (filterContext.ExceptionHandled)
                 return;
-            var ravenClient = new RavenClient("https://f3d2512a066842aca3d8783547ba1381@sentry.io/1356616");
-            ravenClient.Capture(new SentryEvent(filterContext.Exception));
+            /*var ravenClient = new RavenClient("https://f3d2512a066842aca3d8783547ba1381@sentry.io/1356616");
+            filterContext.Exception.Data.Add("User Name","Test User");
+            filterContext.Exception.Data.Add("User ID", "1");
+
+            ravenClient.Capture(new SentryEvent(filterContext.Exception));*/
         }
     }
 }

@@ -180,3 +180,9 @@ F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\obj\Re
 F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\obj\Release\RollbarApplication.dll
 F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\obj\Release\RollbarApplication.pdb
 F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\obj\Release\RollbarApplication.csprojAssemblyReference.cache
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\EntityFramework.dll
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\EntityFramework.SqlServer.dll
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\Sentry.EntityFramework.dll
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\EntityFramework.xml
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\EntityFramework.SqlServer.xml
+F:\RollbarDotNet\Rollbar-Sentry\rollbar-sentry-example\RollbarApplication\bin\Sentry.EntityFramework.xml
